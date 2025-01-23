@@ -11,4 +11,8 @@ public class HomeController {
         model.addAttribute("message", "Hello World ~");
         return "home";
     }
+    @GetMapping("/about")
+    public String about() {
+        return "about";
+    }
 }
