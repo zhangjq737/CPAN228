@@ -1,4 +1,4 @@
-package com.humber.week2;
+package com.CPAN228.test1.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.humber.week2.model.Anime;
-import com.humber.week2.model.CharacterPool;
-import com.humber.week2.model.Fighter;
+import com.CPAN228.test1.model.Anime;
+import com.CPAN228.test1.model.CharacterPool;
+import com.CPAN228.test1.model.Fighter;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,7 +39,7 @@ public class DesignController {
     @ModelAttribute(name = "fighter")
     public Fighter fighter() {
         //return new Fighter(null, 0, 0, 0, null);
-        return new Fighter(null,0,0,0.0000001,null);
+        return new Fighter();
     }
 
     @GetMapping

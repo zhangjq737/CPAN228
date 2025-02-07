@@ -1,4 +1,4 @@
-package com.humber.week2.model;
+package com.CPAN228.test1.model;
 
 import java.util.List;
 

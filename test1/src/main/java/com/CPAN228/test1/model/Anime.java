@@ -1,4 +1,4 @@
-package com.humber.week2.model;
+package com.CPAN228.test1.model;
 
 public enum Anime {
     NARUTO("Naruto"), BLEACH("Bleach"), TEKKEN("Tekken"), ONE_PIECE("One Piece"),
