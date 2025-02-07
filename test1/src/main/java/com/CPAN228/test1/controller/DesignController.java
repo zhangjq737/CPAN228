@@ -3,12 +3,11 @@ package com.CPAN228.test1.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.CPAN228.test1.data.jdbc.JdbcFighterRepository;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import com.CPAN228.test1.model.Anime;
 import com.CPAN228.test1.model.CharacterPool;
@@ -22,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/design")
 @SessionAttributes("characterPool")
 public class DesignController {
+    private final JdbcFighterRepository fighterRepository = new JdbcFighterRepository(new JdbcTemplate());
 
     @ModelAttribute
     public void addAttributes(Model model) {
@@ -40,6 +40,14 @@ public class DesignController {
     public Fighter fighter() {
         //return new Fighter(null, 0, 0, 0, null);
         return new Fighter();
+    }
+
+    @PostMapping
+    public String processDesign(@ModelAttribute("fighter") Fighter fighter) {
+        // Process the submitted fighter data (e.g., validation, saving to a database)
+        // Redirect or return the appropriate view
+        fighterRepository.save(fighter);
+        return "result";
     }
 
     @GetMapping
