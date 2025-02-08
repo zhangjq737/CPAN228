@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Error</title>
+  <link rel="stylesheet" th:href="@{/styles/styles.css}" />
+</head>
+<body>
+<h1>Error</h1>
+<p th:text="${errorMessage}">An unexpected error has occurred.</p>
+<p>
+  <a th:href="@{/design/getAll}">Back to All Fighters</a>
+</p>
+</body>
+</html>

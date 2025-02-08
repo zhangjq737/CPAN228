@@ -1,20 +1,19 @@
 package com.CPAN228.test1.data.jdbc;
 
 import com.CPAN228.test1.data.FighterRepository;
+import com.CPAN228.test1.model.Anime;
 import com.CPAN228.test1.model.Fighter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.sql.PreparedStatement;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 @Repository
 public class JdbcFighterRepository implements FighterRepository {
@@ -29,7 +28,7 @@ public class JdbcFighterRepository implements FighterRepository {
     // 1. Implement findAll method to return all fighters
     @Override
     public Iterable<Fighter> findAll() {
-        String sql = "SELECT id, name, damage_per_hit, health, resistance FROM fighter";
+        String sql = "SELECT id, name, damagePerHit, health, resistance, animeFrom, createdAt FROM fighter";
         List<Fighter> fighters = jdbcTemplate.query(sql, new FighterRowMapper());
         return fighters;
     }
@@ -37,9 +36,9 @@ public class JdbcFighterRepository implements FighterRepository {
     // 2. Implement findById method to return fighter by their id
     @Override
     public Optional<Fighter> findById(long id) {
-        String sql = "SELECT id, name, damage_per_hit, health, resistance FROM fighter WHERE id = ?";
+        String sql = "SELECT id, name, damagePerHit, health, resistance, animeFrom, createdAt FROM fighter WHERE id = ?";
         try {
-            Fighter fighter = jdbcTemplate.queryForObject(sql, new Object[]{id}, new FighterRowMapper());
+            Fighter fighter = jdbcTemplate.queryForObject(sql, new FighterRowMapper(), id);
             return Optional.ofNullable(fighter);
         } catch (Exception e) {
             // Could be EmptyResultDataAccessException if no fighter found
@@ -50,23 +49,17 @@ public class JdbcFighterRepository implements FighterRepository {
     // 3. Implement save method to store a fighter in the database
     @Override
     public Fighter save(Fighter fighter) {
-        String sql = "INSERT INTO fighter (name, damage_per_hit, health, resistance) VALUES (?, ?, ?, ?)";
-        KeyHolder keyHolder = new GeneratedKeyHolder();
+        String sql = "INSERT INTO Fighter (name, damagePerHit, health, resistance, createdAt, animeFrom) VALUES (?, ?, ?, ?, ?, ?)";
 
-        jdbcTemplate.update(connection -> {
-            PreparedStatement ps = connection.prepareStatement(sql, new String[] {"id"});
-            ps.setString(1, fighter.getName());
-            ps.setInt(2, fighter.getDamagePerHit());
-            ps.setInt(3, fighter.getHealth());
-            ps.setDouble(4, fighter.getResistance());
-            return ps;
-        }, keyHolder);
+        int rowsAffected = jdbcTemplate.update(sql,
+                fighter.getName(),
+                fighter.getDamagePerHit(),
+                fighter.getHealth(),
+                fighter.getResistance(),
+                Timestamp.from(Instant.now()),
+                fighter.getAnimeFrom().toString());
 
-        // Set the generated ID in the fighter object, if available
-        Number key = keyHolder.getKey();
-        if (key != null) {
-            fighter.setId(key.longValue());
-        }
+        System.out.println("Rows inserted: " + rowsAffected);
         return fighter;
     }
 
@@ -77,9 +70,11 @@ public class JdbcFighterRepository implements FighterRepository {
             Fighter fighter = new Fighter();
             fighter.setId(rs.getLong("id"));
             fighter.setName(rs.getString("name"));
-            fighter.setDamagePerHit(rs.getInt("damage_per_hit"));
+            fighter.setDamagePerHit(rs.getInt("damagePerHit"));
             fighter.setHealth(rs.getInt("health"));
             fighter.setResistance(rs.getInt("resistance"));
+            fighter.setCreatedAt(rs.getTimestamp("createdAt"));
+            fighter.setAnimeFrom(Anime.valueOf(rs.getString("animeFrom")));
             return fighter;
         }
     }

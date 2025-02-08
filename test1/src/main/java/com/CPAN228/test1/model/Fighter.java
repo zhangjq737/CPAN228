@@ -11,16 +11,16 @@ import java.util.Date;
 @NoArgsConstructor
 public class Fighter {
     private long id;
-    private Date createAt;
-    private  String name;
-    private  int damagePerHit;
-    private  int health;
-    private  double resistance;
-    private  Anime animeFrom;
+    private Date createdAt;
+    private String name;
+    private int damagePerHit;
+    private int health;
+    private double resistance;
+    private Anime animeFrom;
 
-    public Fighter(long id, Date createAt, String name, int damagePerHit, int health, double resistance, Anime animeFrom) {
+    public Fighter(long id, Date createdAt, String name, int damagePerHit, int health, double resistance, Anime animeFrom) {
         this.id = id;
-        this.createAt = createAt;
+        this.createdAt = createdAt;
         this.name = name;
         this.damagePerHit = damagePerHit;
         this.health = health;

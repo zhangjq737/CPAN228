@@ -1,6 +1,7 @@
 package com.CPAN228.test1.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.CPAN228.test1.data.jdbc.JdbcFighterRepository;
@@ -21,7 +22,11 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/design")
 @SessionAttributes("characterPool")
 public class DesignController {
-    private final JdbcFighterRepository fighterRepository = new JdbcFighterRepository(new JdbcTemplate());
+    private final JdbcFighterRepository fighterRepository;
+
+    public DesignController(JdbcFighterRepository fighterRepository) {
+        this.fighterRepository = fighterRepository;
+    }
 
     @ModelAttribute
     public void addAttributes(Model model) {
@@ -38,16 +43,35 @@ public class DesignController {
 
     @ModelAttribute(name = "fighter")
     public Fighter fighter() {
-        //return new Fighter(null, 0, 0, 0, null);
         return new Fighter();
     }
 
     @PostMapping
     public String processDesign(@ModelAttribute("fighter") Fighter fighter) {
-        // Process the submitted fighter data (e.g., validation, saving to a database)
-        // Redirect or return the appropriate view
         fighterRepository.save(fighter);
         return "result";
+    }
+
+    @GetMapping("/getAll")
+    public String getAll(Model model) {
+        model.addAttribute("fighters", fighterRepository.findAll());
+        return "all";
+    }
+
+    @GetMapping("/getById/{id}")
+    public String getById(@PathVariable("id") long id, Model model) {
+        // Retrieve the fighter by ID using the repository
+        Optional<Fighter> fighterOptional = fighterRepository.findById(id);
+        if (fighterOptional.isPresent()) {
+            // Add the found fighter to the model
+            model.addAttribute("fighter", fighterOptional.get());
+            // Return a view that displays details for a single fighter
+            return "fighterDetail";
+        } else {
+            // Handle the case where no fighter is found (e.g., return an error view)
+            model.addAttribute("errorMessage", "Fighter not found");
+            return "error";
+        }
     }
 
     @GetMapping
