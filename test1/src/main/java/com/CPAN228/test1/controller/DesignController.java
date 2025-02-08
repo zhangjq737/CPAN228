@@ -20,18 +20,11 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 @RequestMapping("/design")
-@SessionAttributes("characterPool")
 public class DesignController {
     private final JdbcFighterRepository fighterRepository;
 
     public DesignController(JdbcFighterRepository fighterRepository) {
         this.fighterRepository = fighterRepository;
-    }
-
-    @ModelAttribute
-    public void addAttributes(Model model) {
-        model.addAttribute("characterPool", new CharacterPool());
-        log.info("Added characterPool to model");
     }
 
     @ModelAttribute
@@ -49,7 +42,7 @@ public class DesignController {
     @PostMapping
     public String processDesign(@ModelAttribute("fighter") Fighter fighter) {
         fighterRepository.save(fighter);
-        return "result";
+        return "redirect:/design/getAll";
     }
 
     @GetMapping("/getAll")

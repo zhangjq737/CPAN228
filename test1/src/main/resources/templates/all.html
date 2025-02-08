@@ -24,7 +24,11 @@
     <!-- Loop through the fighters list -->
     <tr th:each="fighter : ${fighters}">
         <td th:text="${fighter.id}">ID</td>
-        <td th:text="${fighter.name}">Name</td>
+        <td>
+            <a th:href="@{/design/getById/{id}(id=${fighter.id})}" th:text="${fighter.name}">
+                Name
+            </a>
+        </td>
         <td th:text="${fighter.createdAt}">Created At</td>
         <td th:text="${fighter.damagePerHit}">Damage Per Hit</td>
         <td th:text="${fighter.health}">Health</td>
