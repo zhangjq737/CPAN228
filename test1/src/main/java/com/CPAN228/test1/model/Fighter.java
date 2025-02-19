@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -15,14 +16,14 @@ public class Fighter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private Date created_at;
+    private LocalDateTime created_at;
     private String name;
     private int damage_per_hit;
     private int health;
     private double resistance;
     private Anime anime_from;
 
-    public Fighter(long id, Date createdAt, String name, int damagePerHit, int health, double resistance, Anime animeFrom) {
+    public Fighter(long id, LocalDateTime createdAt, String name, int damagePerHit, int health, double resistance, Anime animeFrom) {
         this.id = id;
         this.created_at = createdAt;
         this.name = name;
