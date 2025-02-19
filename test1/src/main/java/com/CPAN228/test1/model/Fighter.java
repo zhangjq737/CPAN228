@@ -15,20 +15,20 @@ public class Fighter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private Date createdAt;
+    private Date created_at;
     private String name;
-    private int damagePerHit;
+    private int damage_per_hit;
     private int health;
     private double resistance;
-    private Anime animeFrom;
+    private Anime anime_from;
 
     public Fighter(long id, Date createdAt, String name, int damagePerHit, int health, double resistance, Anime animeFrom) {
         this.id = id;
-        this.createdAt = createdAt;
+        this.created_at = createdAt;
         this.name = name;
-        this.damagePerHit = damagePerHit;
+        this.damage_per_hit = damagePerHit;
         this.health = health;
         this.resistance = resistance;
-        this.animeFrom = animeFrom;
+        this.anime_from = animeFrom;
     }
 }
