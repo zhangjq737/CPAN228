@@ -4,14 +4,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.CPAN228.test1.data.FighterRepository;
 import com.CPAN228.test1.data.jdbc.JdbcFighterRepository;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.CPAN228.test1.model.Anime;
-import com.CPAN228.test1.model.CharacterPool;
 import com.CPAN228.test1.model.Fighter;
 
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +20,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/design")
 public class DesignController {
-    private final JdbcFighterRepository fighterRepository;
+//    private final JdbcFighterRepository fighterRepository;
+    private final FighterRepository fighterRepository;
 
-    public DesignController(JdbcFighterRepository fighterRepository) {
+    public DesignController(FighterRepository fighterRepository) {
         this.fighterRepository = fighterRepository;
     }
 

@@ -1,5 +1,6 @@
 package com.CPAN228.test1.model;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,10 @@ import java.util.Date;
 @Data
 //@AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class Fighter {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private Date createdAt;
     private String name;
