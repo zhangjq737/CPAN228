@@ -7,18 +7,22 @@
     <link rel="stylesheet" th:href="@{/styles/styles.css}" />
 </head>
 <body>
-<h1>Fighter Details</h1>
-<div>
-    <p><strong>ID:</strong> <span th:text="${fighter.id}">ID</span></p>
-    <p><strong>Name:</strong> <span th:text="${fighter.name}">Name</span></p>
-    <p><strong>Created At:</strong> <span th:text="${fighter.createdAt}">Created At</span></p>
-    <p><strong>Damage Per Hit:</strong> <span th:text="${fighter.damagePerHit}">Damage Per Hit</span></p>
-    <p><strong>Health:</strong> <span th:text="${fighter.health}">Health</span></p>
-    <p><strong>Resistance:</strong> <span th:text="${fighter.resistance}">Resistance</span></p>
-    <p><strong>Anime From:</strong> <span th:text="${fighter.animeFrom}">Anime From</span></p>
+<div class="container">
+    <h1>Fighter Details</h1>
+    <div class="fighter-card">
+        <div class="fighter-info">
+            <p><strong>ID:</strong> <span th:text="${fighter.id}">ID</span></p>
+            <p><strong>Name:</strong> <span th:text="${fighter.name}">Name</span></p>
+            <p><strong>Created At:</strong> <span th:text="${fighter.createdAt}">Created At</span></p>
+            <p><strong>Damage Per Hit:</strong> <span th:text="${fighter.damagePerHit}">Damage Per Hit</span></p>
+            <p><strong>Health:</strong> <span th:text="${fighter.health}">Health</span></p>
+            <p><strong>Resistance:</strong> <span th:text="${fighter.resistance}">Resistance</span></p>
+            <p><strong>Anime From:</strong> <span th:text="${fighter.animeFrom}">Anime From</span></p>
+        </div>
+    </div>
+    <div class="back-link">
+        <a th:href="@{/design/fighterList}" class="btn">Back to All Fighters</a>
+    </div>
 </div>
-<p>
-    <a th:href="@{/design/getAll}">Back to All Fighters</a>
-</p>
 </body>
 </html>

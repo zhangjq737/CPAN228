@@ -42,13 +42,13 @@ public class DesignController {
     @PostMapping
     public String processDesign(@ModelAttribute("fighter") Fighter fighter) {
         fighterRepository.save(fighter);
-        return "redirect:/design/getAll";
+        return "redirect:/design/fighterList";
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/fighterList")
     public String getAll(Model model) {
         model.addAttribute("fighters", fighterRepository.findAll());
-        return "all";
+        return "fighterList";
     }
 
     @GetMapping("/getById/{id}")
