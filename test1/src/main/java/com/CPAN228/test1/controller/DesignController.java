@@ -47,7 +47,8 @@ public class DesignController {
 
     @GetMapping("/fighterList")
     public String getAll(Model model) {
-        model.addAttribute("fighters", fighterRepository.findAll());
+//        model.addAttribute("fighters", fighterRepository.findAll());
+        model.addAttribute("fighters", fighterRepository.findAllByOrderByNameAsc());
         return "fighterList";
     }
 

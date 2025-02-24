@@ -17,14 +17,18 @@ public class Fighter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(name = "createdat")
     @CreationTimestamp
     private LocalDateTime createdAt;
     private String name;
+
     @Column(name = "damageperhit")
     private int damagePerHit;
     private int health;
     private double resistance;
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "animefrom")
     private Anime animeFrom;
 }
