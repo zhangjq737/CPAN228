@@ -1,5 +1,8 @@
 package com.CPAN228.test1.model;
 
+import lombok.Getter;
+
+@Getter
 public enum Anime {
     NARUTO("Naruto"),
     BLEACH("Bleach"),
@@ -14,7 +17,4 @@ public enum Anime {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
 }
