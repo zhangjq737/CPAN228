@@ -20,7 +20,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/design")
 public class DesignController {
-//    private final JdbcFighterRepository fighterRepository;
     private final FighterRepository fighterRepository;
 
     public DesignController(FighterRepository fighterRepository) {

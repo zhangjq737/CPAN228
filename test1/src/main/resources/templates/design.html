@@ -12,7 +12,7 @@
     <h1>Design your hero!</h1>
 
     <!-- tag::formTag[] -->
-    <form method="POST" th:object="${fighter}">
+    <form method="POST" th:action="@{/design}" th:object="${fighter}">
 
         <div class="fighter-group">
             <h3>Designate your fighter:</h3>
